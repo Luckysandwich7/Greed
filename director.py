@@ -64,7 +64,7 @@ class Director:
         max_x = self._video_service.get_width()
         max_y = self._video_service.get_height()
         robot.move_next(max_x, max_y)
-        
+        aux_score = 0
         for artifact in artifacts:
             if robot.get_position().equals(artifact.get_position()):
         #This controls where if the GEM or Stone is touched it is then removed.
@@ -81,6 +81,10 @@ class Director:
                         self.score.set_score_plus()
                         aux = f'SCORE: {self.score.get_score()}'
                         banner.set_text(aux)
+                    if aux_score == 1:
+                        self.score.set_score_minus()
+                    elif aux_score == 2:
+                        self.score.set_score_plus()
                         x = random.randint(1, COLS - 1)
                         y = random.randint(1, ROWS - 1)
                         position = Point(x, y)
